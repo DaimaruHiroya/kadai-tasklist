@@ -32,6 +32,10 @@ class UsersController < ApplicationController
   
   def destroy
     @user = current_user
+    @tasks = current_user.tasks.all
+    @tasks.each do |task|
+      task.destroy
+    end
     @user.destroy
     session[:user_id] = nil
     flash[:success] = '退会しました。'
